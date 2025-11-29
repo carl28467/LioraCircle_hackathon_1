@@ -1,0 +1,135 @@
+# Product Requirements Document  
+## LioraCircle (Hackathon Edition)  
+**Version:** 2.1  
+**Type:** Agentic AI Family Health Operating System  
+**Core Engine:** Google Gemini 3.0 Pro
+
+---
+
+## 1. Executive Summary
+
+LioraCircle is a multi agent AI ecosystem built to manage family health as a collective system rather than as isolated individuals. It models an internal Family Graph to understand relationships, dependencies, and shared contexts. Liora operates on a Perceive → Decide → Act loop and handles everything from nutrition planning and schedule conflicts to urgent medical events.
+
+---
+
+## 2. User Flow and Experience (The Golden Path)
+
+### 2.1 Authentication and Handshake
+
+**Entry:** Google Sign In or Email Password.  
+**Onboarding:** No static forms. Liora begins a voice or text conversation to extract:  
+Name, age, biometrics, medical conditions, device ecosystem.  
+**Outcome:** User_Profile_JSON is generated.
+
+### 2.2 Circle Formation (The Fork)
+
+User chooses their role.
+
+#### Path A: Pioneer  
+Liora generates a 6 character invitation code (example: LIORA 882).  
+Pioneer shares the code. Dashboard unlocks.
+
+#### Path B: Joiner  
+User inputs the code.  
+Liora asks the relationship to the Pioneer and updates the Family Graph using NetworkX.
+
+### 2.3 Dashboard (Command Center)
+
+**Vitals Grid:** Real time metrics (HR, SpO2, Steps).  
+Conditional views  
+If diabetic, show CGM Graph  
+If female, show Cycle Phase  
+
+**Family Mood:** Aggregated emotional score from sentiment and sleep data.  
+**Alerts Box:** Red or yellow warnings for anomalies.  
+**Liora FAB:** AI agent accessible from all screens.
+
+---
+
+## 3. Functional Requirements
+
+### FR 1: Contextual Brain
+
+Liora adapts behavior to the user’s life state.
+
+**Pregnancy Mode**  
+Flags dietary risks  
+Tracks trimester and appointments
+
+**Child Mode (<12 yrs)**  
+Gamified tone and simplified language  
+Behavioral nudges like “Did you power up with veggies”
+
+**Geriatric Mode (>70 yrs)**  
+Clearer pacing, focus on meds and fall detection
+
+### FR 2: Strategist (Conflict Resolution)
+
+**Scheduler Logic**  
+Detect conflicts between hard events and soft routines  
+Example  
+Warn user if travel time makes two events incompatible
+
+**Dietary Arbitrator**  
+Meal suggestions based on inventory, preferences and health needs
+
+### FR 3: Guardian (Emergency Protocols)
+
+Detect critical anomalies  
+Classify ACUTE_DANGER  
+Actions  
+Urgent voice override  
+Notify all Guardians  
+Turn UI rings red
+
+### FR 4: Inventory and Vision
+
+User uploads photo of groceries or fridge  
+Gemini Vision identifies items  
+Inventory updates automatically  
+Generates recipe suggestions
+
+---
+
+## 4. Technical Architecture (Hackathon Stack)
+
+### Frontend
+React with Vite  
+Tailwind CSS medical theme  
+Lucide React icons  
+Local React State for simulated routing
+
+### Backend
+FastAPI  
+Google Gemini 3.0 Pro  
+Deep Think for conflict resolution  
+Multimodal vision for inventory and records  
+NetworkX for family relationship graph
+
+### Database
+Firebase Firestore for real time vitals and alerts  
+ChromaDB for vector memory
+
+---
+
+## 5. Hackathon Demo Strategy (Simulation Panel)
+
+Hidden developer panel with triggers
+
+Simulate Glucose Drop (Mike)  
+Triggers red alert and emergency chat  
+
+Simulate Pregnancy Mode (Sarah)  
+Updates UI constraints  
+
+Simulate Fall Detected (Grandma)  
+Push notification to Pioneers  
+
+---
+
+## 6. Success Metrics
+
+Chat response under 1.5 seconds using Gemini Flash  
+Conflict resolution must be logically consistent  
+Family Mood and Status Rings update instantly on new data
+
